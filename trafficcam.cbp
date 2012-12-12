@@ -40,14 +40,22 @@
 		</Linker>
 		<ExtraCommands>
 			<Add before="C:\Qt\4.8.3\bin\moc -o src/moc_MainWindow.cpp src/MainWindow.h" />
+			<Add before="C:\Qt\4.8.3\bin\moc -o src/moc_ResultWindow.cpp src/ResultWindow.h" />
+			<Add before="C:\Qt\4.8.3\bin\moc -o src/moc_qcustomplot.cpp src/qcustomplot.h" />
 			<Mode after="always" />
 		</ExtraCommands>
 		<Unit filename="src/MainWindow.cpp" />
 		<Unit filename="src/MainWindow.h" />
+		<Unit filename="src/ResultWindow.cpp" />
+		<Unit filename="src/ResultWindow.h" />
 		<Unit filename="src/main.cpp" />
 		<Unit filename="src/moc_MainWindow.cpp" />
+		<Unit filename="src/moc_ResultWindow.cpp" />
+		<Unit filename="src/moc_qcustomplot.cpp" />
 		<Unit filename="src/model.cpp" />
 		<Unit filename="src/model.h" />
+		<Unit filename="src/qcustomplot.cpp" />
+		<Unit filename="src/qcustomplot.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />
