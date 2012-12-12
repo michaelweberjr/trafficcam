@@ -901,16 +901,128 @@
 1355014745 source:c:\users\michael jr\documents\github\trafficcam\src\src\model.cpp
 	"model.h"
 
-1355015423 c:\users\michael jr\documents\github\trafficcam\src\mainwindow.h
+1355262827 c:\users\michael jr\documents\github\trafficcam\src\mainwindow.h
 	<QtGui>
+	"ResultWindow.h"
 	"model.h"
 
-1355014020 c:\users\michael jr\documents\github\trafficcam\src\model.h
+1355278321 c:\users\michael jr\documents\github\trafficcam\src\model.h
+	<stdlib.h>
+	<QtGui>
 
-1355016103 source:c:\users\michael jr\documents\github\trafficcam\src\mainwindow.cpp
+1355278772 source:c:\users\michael jr\documents\github\trafficcam\src\mainwindow.cpp
 	"MainWindow.h"
 	<stdio.h>
 
-1355014745 source:c:\users\michael jr\documents\github\trafficcam\src\model.cpp
+1355278823 source:c:\users\michael jr\documents\github\trafficcam\src\model.cpp
 	"model.h"
+
+1353182383 c:\qt\4.8.3\include\qtcore
+
+1339205688 source:c:\users\michael jr\documents\github\trafficcam\src\qcustomplot.cpp
+	"qcustomplot.h"
+
+1355262001 c:\users\michael jr\documents\github\trafficcam\src\qcustomplot.h
+	<QWidget>
+	<QPainter>
+	<QPaintEvent>
+	<QPixmap>
+	<QVector>
+	<QString>
+	<QPrinter>
+	<QDateTime>
+	<QMultiMap>
+	<QFlags>
+	<QDebug>
+	<QVector2D>
+	<QStack>
+	<qmath.h>
+	<QtGui>
+	<limits>
+
+1355266356 source:c:\users\michael jr\documents\github\trafficcam\src\resultwindow.cpp
+	"ResultWindow.h"
+	<stdio.h>
+
+1355265301 c:\users\michael jr\documents\github\trafficcam\src\resultwindow.h
+	<QtGui>
+	"qcustomplot.h"
+	"model.h"
+
+1347323814 c:\qt\4.8.3\include\qtgui\qwidget
+	"qwidget.h"
+
+1347323814 c:\qt\4.8.3\include\qtgui\qpainter
+	"qpainter.h"
+
+1347323814 c:\qt\4.8.3\include\qtgui\qpainter.h
+	"../../src/gui/painting/qpainter.h"
+
+1347323812 c:\qt\4.8.3\src\gui\painting\qpainter.h
+	<QtCore/qnamespace.h>
+	<QtCore/qrect.h>
+	<QtCore/qpoint.h>
+	<QtCore/qscopedpointer.h>
+	<QtGui/qpixmap.h>
+	<QtGui/qimage.h>
+	<QtGui/qtextoption.h>
+	<QtGui/qdrawutil.h>
+	<QtGui/qpolygon.h>
+	<QtGui/qpen.h>
+	<QtGui/qbrush.h>
+	<QtGui/qmatrix.h>
+	<QtGui/qtransform.h>
+	<QtGui/qfontinfo.h>
+	<QtGui/qfontmetrics.h>
+
+1347323814 c:\qt\4.8.3\include\qtgui\qtextoption.h
+	"../../src/gui/text/qtextoption.h"
+
+1347323812 c:\qt\4.8.3\src\gui\text\qtextoption.h
+	<QtCore/qnamespace.h>
+	<QtCore/qchar.h>
+	<QtCore/qmetatype.h>
+
+1347323814 c:\qt\4.8.3\include\qtgui\qdrawutil.h
+	"../../src/gui/painting/qdrawutil.h"
+
+1347323812 c:\qt\4.8.3\src\gui\painting\qdrawutil.h
+	<QtCore/qnamespace.h>
+	<QtCore/qstring.h>
+	<QtCore/qmargins.h>
+	<QtGui/qpixmap.h>
+
+1347323814 c:\qt\4.8.3\include\qtgui\qpen.h
+	"../../src/gui/painting/qpen.h"
+
+1347323812 c:\qt\4.8.3\src\gui\painting\qpen.h
+	<QtGui/qcolor.h>
+	<QtGui/qbrush.h>
+
+1347323814 c:\qt\4.8.3\include\qtgui\qpaintevent
+	"qevent.h"
+
+1347323814 c:\qt\4.8.3\include\qtgui\qpixmap
+	"qpixmap.h"
+
+1347323814 c:\qt\4.8.3\include\qtgui\qprinter
+	"qprinter.h"
+
+1347323814 c:\qt\4.8.3\include\qtgui\qprinter.h
+	"../../src/gui/painting/qprinter.h"
+
+1347323812 c:\qt\4.8.3\src\gui\painting\qprinter.h
+	<QtCore/qstring.h>
+	<QtCore/qscopedpointer.h>
+	<QtGui/qpaintdevice.h>
+
+1347323814 c:\qt\4.8.3\include\qtgui\qvector2d
+	"qvector2d.h"
+
+1347323814 c:\qt\4.8.3\include\qtgui\qvector2d.h
+	"../../src/gui/math3d/qvector2d.h"
+
+1347323812 c:\qt\4.8.3\src\gui\math3d\qvector2d.h
+	<QtCore/qpoint.h>
+	<QtCore/qmetatype.h>
 

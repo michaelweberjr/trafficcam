@@ -1,5 +1,5 @@
 /*
-    main.cpp - (c) Michael Weber, Jr. (2012)
+    ResultWindow.h - (c) Michael Weber, Jr. (2012)
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,14 +15,34 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#include <QApplication>
-#include "MainWindow.h"
+#ifndef RESULTWINDOW_H
+#define RESULTWINDOW_H
 
-int main(int argc, char ** argv)
+#include <QtGui>
+#include "qcustomplot.h"
+#include "model.h"
+
+class ResultWindow : public QWidget
 {
-    QApplication app(argc, argv);
-    MainWindow mw;
-    mw.show();
+    Q_OBJECT
 
-    return app.exec();
-}
+    public:
+        ResultWindow(QWidget *parent);
+        virtual ~ResultWindow();
+
+    public slots:
+        void tick();
+
+    private:
+        QTimer *timer;
+        QCustomPlot *plot;
+        Model *model;
+        QCPCurve *lane1;
+        QCPCurve *lane2;
+        QLabel *tickLabel;
+        QLabel *tickCountLabel;
+        QHBoxLayout *tickLayout;
+        QVBoxLayout *mainLayout;
+};
+
+#endif

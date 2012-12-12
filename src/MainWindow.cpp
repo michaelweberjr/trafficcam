@@ -1,3 +1,20 @@
+/*
+    MainWindow.cpp - (c) Michael Weber, Jr. (2012)
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
 #include "MainWindow.h"
 #include <stdio.h>
 
@@ -9,6 +26,7 @@ MainWindow::MainWindow()
     numOfLanesLabel = new QLabel("Number of Lanes:");
     numOfLanesSpinBox = new QSpinBox();
     numOfLanesSpinBox->setValue(2);
+    numOfLanesSpinBox->setDisabled(true);
     vTempLayout->addWidget(numOfLanesLabel);
     vTempLayout->addWidget(numOfLanesSpinBox);
     hGroupLayout->addLayout(vTempLayout);
@@ -45,7 +63,7 @@ MainWindow::MainWindow()
 
     maxVelLabel = new QLabel("Maximum Car Velocity:");
     maxVelSpinBox = new QSpinBox();
-    maxVelSpinBox->setValue(6);
+    maxVelSpinBox->setValue(4);
     vTempLayout = new QHBoxLayout();
     vTempLayout->addWidget(maxVelLabel);
     vTempLayout->addWidget(maxVelSpinBox);
@@ -61,7 +79,7 @@ MainWindow::MainWindow()
 
     truckLabel = new QLabel("Percentage of Trucks:");
     truckLineEdit = new QLineEdit();
-    truckLineEdit->setText("0.1");
+    truckLineEdit->setText("0.25");
     vTempLayout = new QHBoxLayout();
     vTempLayout->addWidget(truckLabel);
     vTempLayout->addWidget(truckLineEdit);
@@ -73,19 +91,45 @@ MainWindow::MainWindow()
 
     runButton = new QPushButton("Run Model");
     connect(runButton, SIGNAL(clicked()), this, SLOT(run()));
+    vTempLayout = new QHBoxLayout();
+    vTempLayout->addStretch();
+    vTempLayout->addWidget(runButton);
+    vTempLayout->addStretch();
+
     vLayout = new QHBoxLayout();
     vLayout->addWidget(globalParamBox);
     vLayout->addWidget(carParamBox);
     hLayout = new QVBoxLayout;
     hLayout->addLayout(vLayout);
-    hLayout->addWidget(runButton);
+    hLayout->addLayout(vTempLayout);
 
     setLayout(hLayout);
 }
 
 void MainWindow::run()
 {
+    model = new Model();
+    model->numberOfLanes = numOfLanesSpinBox->value();
+    model->numberOfCells = numOfCellsLineEdit->text().toInt();
+    model->numberOfCars = numOfCarsLineEdit->text().toInt();
+    model->numberofTimeSteps = numOfTimeStepsLineEdit->text().toInt();
+    model->max_vel = maxVelSpinBox->value();
+    model->brake = brakeLineEdit->text().toDouble();
+    model->trucks = truckLineEdit->text().toDouble();
+    model->init();
 
+    for(int i = 0; i < model->numberofTimeSteps; i++)
+        model->tick();
+
+    csv("data.csv", model->time_count, model->lane1_use, model->lane2_use, model->avg_speed);
+
+    QMessageBox msgBox;
+    msgBox.setText("Finished, check data.csv");
+    msgBox.exec();
+
+    //ResultWindow *rw = new ResultWindow(NULL);
+    //rw->show();
+    //delete rw;
 }
 
 MainWindow::~MainWindow()
