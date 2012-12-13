@@ -33,7 +33,7 @@ MainWindow::MainWindow()
 
     numOfCellsLabel = new QLabel("Number of Cells:");
     numOfCellsLineEdit = new QLineEdit();
-    numOfCellsLineEdit->setText("100000");
+    numOfCellsLineEdit->setText("12975");
     vTempLayout = new QHBoxLayout();
     vTempLayout->addWidget(numOfCellsLabel);
     vTempLayout->addWidget(numOfCellsLineEdit);
@@ -63,7 +63,7 @@ MainWindow::MainWindow()
 
     maxVelLabel = new QLabel("Maximum Car Velocity:");
     maxVelSpinBox = new QSpinBox();
-    maxVelSpinBox->setValue(4);
+    maxVelSpinBox->setValue(5);
     vTempLayout = new QHBoxLayout();
     vTempLayout->addWidget(maxVelLabel);
     vTempLayout->addWidget(maxVelSpinBox);
@@ -79,10 +79,17 @@ MainWindow::MainWindow()
 
     truckLabel = new QLabel("Percentage of Trucks:");
     truckLineEdit = new QLineEdit();
-    truckLineEdit->setText("0.25");
+    truckLineEdit->setText("0.15");
     vTempLayout = new QHBoxLayout();
     vTempLayout->addWidget(truckLabel);
     vTempLayout->addWidget(truckLineEdit);
+    hGroupLayout->addLayout(vTempLayout);
+
+    vTempLayout = new QHBoxLayout();
+    vTempLayout->addWidget(new QLabel("Verticle Offset for Passing:"));
+    voffSpinBox = new QSpinBox();
+    voffSpinBox->setValue(1);
+    vTempLayout->addWidget(voffSpinBox);
     hGroupLayout->addLayout(vTempLayout);
 
     carParamBox = new QGroupBox();
@@ -116,7 +123,10 @@ void MainWindow::run()
     model->max_vel = maxVelSpinBox->value();
     model->brake = brakeLineEdit->text().toDouble();
     model->trucks = truckLineEdit->text().toDouble();
+    model->voff = voffSpinBox->text().toInt();
     model->init();
+
+    model->dump();
 
     for(int i = 0; i < model->numberofTimeSteps; i++)
         model->tick();

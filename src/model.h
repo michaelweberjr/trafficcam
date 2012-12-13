@@ -55,6 +55,7 @@ class Model
         int max_vel;                // The max velocity that any car can have
         double brake;               // The probabilty of a car braking for each car
         double trucks;              // Percentage of trucks on the road
+        int voff;                   // This determines how much headway we need to move back right
 
         int currentTick;
 

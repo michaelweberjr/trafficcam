@@ -53,6 +53,7 @@ class MainWindow : public QWidget
         QLineEdit   *brakeLineEdit;
         QLabel      *truckLabel;
         QLineEdit   *truckLineEdit;
+        QSpinBox    *voffSpinBox;
 
         QPushButton *runButton;
         QVBoxLayout *hLayout;

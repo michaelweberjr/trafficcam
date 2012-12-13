@@ -30,18 +30,18 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add directory="C:/Qt/4.8.3/include" />
-			<Add directory="C:/Qt/4.8.3/include/QtGui" />
+			<Add directory="C:/Qt/4.8.4/include" />
+			<Add directory="C:/Qt/4.8.4/include/QtGui" />
 		</Compiler>
 		<Linker>
-			<Add library="QtCore4" />
-			<Add library="QtGui4" />
+			<Add library="C:\Qt\4.8.4\lib\libQtCore4.a" />
+			<Add library="C:\Qt\4.8.4\lib\libQtGui4.a" />
 			<Add directory="C:/Qt/4.8.3/lib" />
 		</Linker>
 		<ExtraCommands>
-			<Add before="C:\Qt\4.8.3\bin\moc -o src/moc_MainWindow.cpp src/MainWindow.h" />
-			<Add before="C:\Qt\4.8.3\bin\moc -o src/moc_ResultWindow.cpp src/ResultWindow.h" />
-			<Add before="C:\Qt\4.8.3\bin\moc -o src/moc_qcustomplot.cpp src/qcustomplot.h" />
+			<Add before="C:\Qt\4.8.4\bin\moc -o src/moc_MainWindow.cpp src/MainWindow.h" />
+			<Add before="C:\Qt\4.8.4\bin\moc -o src/moc_ResultWindow.cpp src/ResultWindow.h" />
+			<Add before="C:\Qt\4.8.4\bin\moc -o src/moc_qcustomplot.cpp src/qcustomplot.h" />
 			<Mode after="always" />
 		</ExtraCommands>
 		<Unit filename="src/MainWindow.cpp" />

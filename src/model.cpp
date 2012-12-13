@@ -32,24 +32,68 @@ void Car::update()
     if(cell >= Model::instance->numberOfCells) return;
 
     int headway = 0;
+    bool changing_lanes = false;
     for(int i = cell+1; i < Model::instance->numberOfCells; i++)
     {
-        if(Model::instance->cells[i][lane] == NULL) break;
+        if(Model::instance->cells[i][lane] != NULL) break;
         headway++;
     }
-    if(headway < speed)
+    if(cell+headway+1 < Model::instance->numberOfCells && headway <= speed)
     {
-        speed = headway;
+        if(headway < speed && lane == 0)
+        {
+            changing_lanes = true;
+            for(int j = cell + speed; j > cell-Model::instance->max_vel; j--)
+            {
+                // if we would go off the road then passing is still valid and no checks for cars need to be made
+                if(j >= Model::instance->numberOfCells) continue;
+                // This checks if our passing would move into a car and thus would be worse
+                if(j >= cell && Model::instance->cells[j][1] != NULL)
+                {
+                    changing_lanes = false;
+                    break;
+                }
+                // This checks to see if a car would then move into us
+                if(j >= 0 && Model::instance->cells[j][1] != NULL && Model::instance->cells[j][1]->speed+j >= cell)
+                {
+                    changing_lanes = false;
+                    break;
+                }
+            }
+        }
+        if(!changing_lanes) speed = headway;
     }
     else if(speed < desiredSpeed)
     {
         speed++;
+    }
+    else if(speed == desiredSpeed && lane == 1)
+    {
+        headway = 0;
+        for(int i = cell; i < Model::instance->numberOfCells; i++)
+        {
+            if(Model::instance->cells[i][0] != NULL) break;
+            headway++;
+        }
+        if(headway > speed+Model::instance->voff)
+        {
+            changing_lanes = true;
+            for(int i = cell; i >= cell - Model::instance->max_vel; i--)
+            {
+                if(i >= 0 && Model::instance->cells[i][0] != NULL && Model::instance->cells[i][0]->speed+i >= cell)
+                {
+                    changing_lanes = false;
+                    break;
+                }
+            }
+        }
     }
 
     if(speed > 0 && rand() % 100 < brake * 100) speed--;
 
     Model::instance->cells[cell][lane] = NULL;
     cell += speed;
+    if(changing_lanes) lane = lane == 1 ? 0 : 1;
     if(cell < Model::instance->numberOfCells) Model::instance->cells[cell][lane] = this;
 }
 
@@ -114,6 +158,7 @@ void Model::init()
             {
                 if(cells[l][0] != NULL) l++;
             }
+            if(cells[l][0] != NULL) l++;
 
             // Now set the desired speed limit
             int vel = max_vel;
@@ -135,9 +180,12 @@ void Model::init()
             int l = 0;
             for(int j = 0; j < cell; j++, l++)
             {
-                lane = l < totalCells / 3 ? 0 : l >= totalCells * 2 / 3 ? 2 : 1;
-                if(cells[l < totalCells / 3 ? l : l >= totalCells * 2 / 3 ? l - 2*numberOfCells : l - numberOfCells][lane] != NULL) l++;
+                lane = l < totalCells / 2 ? 0 : 1;
+                if(cells[l < totalCells / 2 ? l : l - numberOfCells][lane] != NULL) l++;
             }
+            if(cells[l < totalCells / 2 ? l : l - numberOfCells][lane] != NULL) l++;
+            l = l < totalCells / 2 ? l : l - numberOfCells;
+            lane = l < totalCells / 2 ? 0 : 1;
 
             // Now set the desired speed limit
             int vel = max_vel;
@@ -149,10 +197,15 @@ void Model::init()
         }
     }
 
+    /*FILE* file = fopen("cars.csv", "w");
+    for(int i = 0; i < numberOfCars; i ++)
+        fprintf(file, "%d,%d,%d,%d\n", i, cars[i]->lane, cars[i]->cell, cars[i]->speed);
+    fclose(file);*/
 }
 
 void Model::tick()
 {
+    if(currentTick % 10000 == 0) printf("%d\n", currentTick);
     if(currentTick++ < numberofTimeSteps)
     {
         // We update cars by going in order from first to last and left to right
@@ -171,6 +224,14 @@ void Model::tick()
             if(cars[i]->cell >= numberOfCells)
                 cars[i]->reset();
         }
+
+        /*if(currentTick == 1)
+        {
+            FILE* file = fopen("cars2.csv", "w");
+                for(int i = 0; i < numberOfCars; i ++)
+                    fprintf(file, "%d,%d,%d,%d\n", i, cars[i]->lane, cars[i]->cell, cars[i]->speed);
+                fclose(file);
+        }*/
 
         // now that everything is updated we set the results
         int lane1 = 0, lane2 = 0;
@@ -225,4 +286,5 @@ void Model::dump()
     printf("Max Velocity: %d\n", max_vel);
     printf("Braking probility: %lf\n", brake);
     printf("Percentage of Trucks: %lf\n", trucks);
+    printf("Vehicle Offset: %d\n", voff);
 }
